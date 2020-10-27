@@ -1,7 +1,7 @@
 class Touch extends HTMLElement {
 	shape;
 	color;
-	
+
 	constructor (shape, color) {
 		super();
 		this.shape = shape;
@@ -13,13 +13,14 @@ class Touch extends HTMLElement {
 
 		this.audioEl = new Audio();
 		this.audioEl.src = this.sound;
-		this.audioEl.setAttribute('display', 'none');
+		this.audioEl.style.display = "none";
 		this.appendChild(this.audioEl);
 	}
 
 	initializeAttributes() {
         this.setAttribute("id", this.shape);
-		this.setAttribute("style", "background-color:" + this.color);
+		this.style.backgroundColor= this.color;
+		this.style.borderRadius = "50%";
     }
 
 	initListeners(){
