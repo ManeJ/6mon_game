@@ -13,5 +13,14 @@ main.appendChild(touch4);
 
 
 touch1.addEventListener('touchClicked', function (ev) {
-    console.log(touch1.detail);
+    console.log(ev.detail);
+});
+touch2.addEventListener('touchClicked', function (ev) {
+    console.log(ev.detail);
+});
+touch3.addEventListener('touchClicked', function (ev) {
+    console.log(ev.detail);
+});
+touch4.addEventListener('touchClicked', function (ev) {
+    console.log(ev.detail);
 });
