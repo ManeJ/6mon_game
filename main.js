@@ -1,8 +1,10 @@
 function start(){
     $('#start').click(function () {
-        $('#game-container').attr('style', 'visibility:visible');
-        $('.start-container').hide();
         var val = $('#pseudo').val();
+        if (val != '') {
+            $('#game-container').attr('style', 'visibility:visible');
+            $('.start-container').hide();    
+        }
         console.log(val);
     });
 }
