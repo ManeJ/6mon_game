@@ -1,17 +1,50 @@
-$(document).ready(function() {
-    // function start() {
-    //     $('#btn-start').click(function () {
-    //         audioElement.play();
-    //         $("#status").text("Status: Playing");
-    //     });
-    // }
+// $(document).ready(function() {
+//     // function start() {
+//     //     $('#btn-start').click(function () {
+//     //         audioElement.play();
+//     //         $("#status").text("Status: Playing");
+//     //     });
+//     // }
 
-    var song;
-    function init(){
-        song = document.createElement('audio');
-        song.setAttribute('src', './sounds/sound2.mp3');
-    } // end init
+//     var song;
+//     function init(){
+//         song = document.createElement('audio');
+//         song.setAttribute('src', './sounds/sound2.mp3');
+//     } // end init
 
-    // start();
-    init();
+//     // start();
+//     init();
+// });
+
+var square = new Touch('square','red');
+var triangle = new Touch('triangle','blue');
+var circle = new Touch('circle','green');
+var cross = new Touch('cross','yellow');
+
+main.appendChild(square);
+main.appendChild(triangle);
+main.appendChild(circle);
+main.appendChild(cross);
+
+square.addEventListener('touchClicked', function (ev) {
+    console.log(ev.detail);
 });
+
+triangle.addEventListener('touchClicked', function (ev) {
+    console.log(ev.detail);
+});
+
+circle.addEventListener('touchClicked', function (ev) {
+    console.log(ev.detail);
+});
+
+cross.addEventListener('touchClicked', function (ev) {
+    console.log(ev.detail);
+}); 
+
+document.onclick = function(){
+	square.play().then(function(data){
+		console.log('playdone');
+		circle.play();
+	});
+};

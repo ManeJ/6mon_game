@@ -1,37 +1,51 @@
-class Touch extends HTMLElement {
-	id = 0;
-	sound;
-	image;
-	
-	
-	constructor (id, sound, image) {
-		this.id = id+1;
+shape;
+color;
 
-		switch(id) {
-			case 1 : 
-				sound = "./sounds/sound1.mp3";
-				image = ;
-			case 2 : 
-				sound = "./sounds/sound2.mp3";
-				image = ;
-			case 3 : 
-				sound = "./sounds/sound3.mp3";
-				image = ;
-			case 4 : 
-				sound = "./sounds/sound4.mp3";
-				image = ;
-		}
+constructor (shape, color) {
+	super();
+	this.shape = shape;
+	this.color = color;
+	this.sound = "./sounds/sound_"+shape+".mp3";
+	this.initializeAttributes();
+	this.initListeners();
 
-		this.initListeners();
-	}
+	this.audioEl = new Audio();
+	this.audioEl.src = this.sound;
+	this.audioEl.setAttribute('display', 'none');
+	this.appendChild(this.audioEl);
+}
 
-	initListeners(){
-        this.onclick = function() {
-            this.show();
-            var event = new CustomEvent('touchClicked', ...);
+initializeAttributes() {
+	this.setAttribute("id", this.shape);
+	this.setAttribute("style", "background-color:" + this.color);
+}
 
-            this.dispatchEvent(event);
+initListeners(){
+	let me = this;
+	this.onclick = function() {
+		me.play();
         }
+	}
+	
+	play() {
+    	let me = this;
+    	return new Promise(function(resolve, reject){
+			me.style.opacity = 0.7;
+    		me.audioEl.play();
+			me.audioEl.onended = function(){
+				me.stop();
+				resolve(me.shape);
+			}	
+    	});
+    }
+
+    stop(){
+    	this.style.opacity = 0;
+    	var event = new CustomEvent('touchClicked', {
+				detail: {
+					id: this.shape
+				}
+			});
+			this.dispatchEvent(event);
     }
 }
-window.customElements.define('touch', Touch);
