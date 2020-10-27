@@ -1,9 +1,96 @@
-
+#game-container{
+    visibility:hidden;
+}
+#pseudo{
+    margin-top: 15px;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+#start{
+    padding: 10px;
+    border-radius: 8px;
+}
+.start-container{
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
+    border: 1px solid #f1f1f1;
+    border-radius: 5px;
+    position: absolute;
+    top: 32%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 35%;
+    padding: 20px;
+    text-align: center;
+    
+    /* display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    height: 100px;
+    text-align: center;
+    border-radius: 5px;
+    background: blueviolet; */
+}
+body, html {
+    height: 100%;
+}
+* {
+    box-sizing: border-box;
+}
+.bg-img{
+  background-image: url("images/gamepad-full.jpg");
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#game-img{
+    background:  url(images/gamepad-cutted.png) no-repeat top center;
+    height: 100%;
+    /* background-image: url("images/gamepad-cutted.png"); */
+}
+.container{
+    height: 100%;
+    width: 100%;
+    
+}
+#error{
+    color: red;
+    visibility:hidden;
+}
 
 div-touch {
-	width: 50px;
-	height: 50px;
+	width: 81px;
+	height: 81px;
 	display: block;
 	z-index:10;
 	opacity:0;
+	position: relative;
+}
+
+div-touch#square {
+    top: 36.3%;
+    left: 45.7%;
+}
+
+div-touch#circle {
+    top: 7%;
+    left: 55.25%;
+}
+
+div-touch#triangle {
+    top: 5%;
+    left: 50.5%;
+}
+
+div-touch#cross {
+    top: 8.75%;
+    left: 50.46%;
 }
