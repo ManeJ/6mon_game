@@ -1,26 +1,33 @@
 window.customElements.define('div-touch', Touch);
 var main = document.getElementById('main');
 
-var touch1 = new Touch(1);
-var touch2 = new Touch(2);
-var touch3 = new Touch(3);
-var touch4 = new Touch(4);
+var square = new Touch('square','red');
+var triangle = new Touch('triangle','blue');
+var circle = new Touch('circle','green');
+var cross = new Touch('cross','yellow');
 
-main.appendChild(touch1);
-main.appendChild(touch2);
-main.appendChild(touch3);
-main.appendChild(touch4);
+main.appendChild(square);
+main.appendChild(triangle);
+main.appendChild(circle);
+main.appendChild(cross);
 
 
-touch1.addEventListener('touchClicked', function (ev) {
+square.addEventListener('touchClicked', function (ev) {
     console.log(ev.detail);
 });
-touch2.addEventListener('touchClicked', function (ev) {
+triangle.addEventListener('touchClicked', function (ev) {
     console.log(ev.detail);
 });
-touch3.addEventListener('touchClicked', function (ev) {
+circle.addEventListener('touchClicked', function (ev) {
     console.log(ev.detail);
 });
-touch4.addEventListener('touchClicked', function (ev) {
+cross.addEventListener('touchClicked', function (ev) {
     console.log(ev.detail);
 });
+
+document.onclick = function(){
+	square.play().then(function(data){
+		console.log('playdone');
+		circle.play();
+	});
+};

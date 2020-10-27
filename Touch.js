@@ -1,57 +1,53 @@
 class Touch extends HTMLElement {
-	id;
-	sound;
-	bgColor;
-	opacity = 0;
+	shape;
+	color;
 	
-	
-	constructor (id) {
+	constructor (shape, color) {
 		super();
-		this.id = id;
+		this.shape = shape;
+		this.color = color;
+		this.sound = "./sounds/sound_"+shape+".mp3";
 
 		this.initializeAttributes();
 		this.initListeners();
+
+		this.audioEl = new Audio();
+		this.audioEl.src = this.sound;
+		this.audioEl.setAttribute('display', 'none');
+		this.appendChild(this.audioEl);
 	}
 
 	initializeAttributes() {
-
-        switch(this.id) {
-			case 1 : 
-				this.sound = "./sounds/sound1.mp3";
-				this.bgColor = "green";
-				break;
-			case 2 : 
-				this.sound = "./sounds/sound2.mp3";
-				this.bgColor = "orange";
-				break;
-			case 3 : 
-				this.sound = "./sounds/sound3.mp3";
-				this.bgColor = "blue";
-				break;
-			case 4 : 
-				this.sound = "./sounds/sound4.mp3";
-				this.bgColor = "purple";
-				break;
-		}
-		
-        this.setAttribute("id", this.id);
-		this.setAttribute("style", "background-color:" + this.bgColor);
-
+        this.setAttribute("id", this.shape);
+		this.setAttribute("style", "background-color:" + this.color);
     }
 
 	initListeners(){
-
+		let me = this;
         this.onclick = function() {
-            var event = new CustomEvent('touchClicked', {
+            me.play();
+        }
+    }
+
+    play() {
+    	let me = this;
+    	return new Promise(function(resolve, reject){
+			me.style.opacity = 0.7;
+    		me.audioEl.play();
+			me.audioEl.onended = function(){
+				me.stop();
+				resolve(me.shape);
+			}	
+    	});
+    }
+
+    stop(){
+    	this.style.opacity = 0;
+    	var event = new CustomEvent('touchClicked', {
 				detail: {
-					id: this.id,
-					sound: this.sound
+					id: this.shape
 				}
 			});
-			var audio = new Audio(this.sound);
-            audio.play();
-			this.style.opacity = 0.7;
-            this.dispatchEvent(event);
-        }
+    	this.dispatchEvent(event);
     }
 }
