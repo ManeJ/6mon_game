@@ -1,0 +1,30 @@
+.touch-pad {
+    display: flex;
+    justify-content: space-between;
+    justify-content: space-around;
+}
+
+.touch {
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    margin: 10px;
+    
+}
+
+.touch:hover{
+    background-color: black;
+}
+
+#btn-div{
+    display: flex;
+    justify-content: space-around;
+}
+
+#btn-start {
+    width: 50px;
+    height: 20px;
+    border: 1px solid black;
+    margin: 10px;
+    padding: 2px;
+}
