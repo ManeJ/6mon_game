@@ -3,7 +3,10 @@ function start(){
         var val = $('#pseudo').val();
         if (val != '') {
             $('#game-container').attr('style', 'visibility:visible');
-            $('.start-container').hide();    
+            $('#game-img').attr('style', 'visibility:visible');
+            $('.start-container, .bg-img').hide();    
+        }else{
+            $('#error').attr('style', 'visibility:visible');
         }
         console.log(val);
     });
