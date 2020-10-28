@@ -1,33 +1,35 @@
-shape;
-color;
-
-constructor (shape, color) {
-	super();
-	this.shape = shape;
-	this.color = color;
-	this.sound = "./sounds/sound_"+shape+".mp3";
-	this.initializeAttributes();
-	this.initListeners();
-
-	this.audioEl = new Audio();
-	this.audioEl.src = this.sound;
-	this.audioEl.setAttribute('display', 'none');
-	this.appendChild(this.audioEl);
-}
-
-initializeAttributes() {
-	this.setAttribute("id", this.shape);
-	this.setAttribute("style", "background-color:" + this.color);
-}
-
-initListeners(){
-	let me = this;
-	this.onclick = function() {
-		me.play();
-        }
-	}
+class Touch extends HTMLElement {
+	shape;
+	color;
 	
-	play() {
+	constructor (shape, color) {
+		super();
+		this.shape = shape;
+		this.color = color;
+		this.sound = "./sounds/sound_"+shape+".mp3";
+
+		this.initializeAttributes();
+		this.initListeners();
+
+		this.audioEl = new Audio();
+		this.audioEl.src = this.sound;
+		this.audioEl.setAttribute('display', 'none');
+		this.appendChild(this.audioEl);
+	}
+
+	initializeAttributes() {
+        this.setAttribute("id", this.shape);
+		this.setAttribute("style", "background-color:" + this.color);
+    }
+
+	initListeners(){
+		let me = this;
+        this.onclick = function() {
+            me.play();
+        }
+    }
+
+    play() {
     	let me = this;
     	return new Promise(function(resolve, reject){
 			me.style.opacity = 0.7;
@@ -46,6 +48,6 @@ initListeners(){
 					id: this.shape
 				}
 			});
-			this.dispatchEvent(event);
+    	this.dispatchEvent(event);
     }
 }
