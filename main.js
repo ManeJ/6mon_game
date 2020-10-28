@@ -1,21 +1,8 @@
-function start(){
-    $('#start').click(function () {
-        var val = $('#pseudo').val();
-        if (val != '') {
-            $('#game-container').attr('style', 'visibility:visible');
-            $('#game-img').attr('style', 'visibility:visible');
-            $('.start-container, .bg-img').hide();    
-        }else{
-            $('#error').attr('style', 'visibility:visible');
-        }
-        console.log(val);
-    });
-}
 
-start();
-
+window.customElements.define('div-list', ListeScore);
 window.customElements.define('div-touch', Touch);
 var main = document.getElementById('game-img');
+
 
 
 var square = new Touch('square','purple');
@@ -27,6 +14,7 @@ main.appendChild(square);
 main.appendChild(triangle);
 main.appendChild(circle);
 main.appendChild(cross);
+
 
 
 square.addEventListener('touchClicked', function (ev) {
