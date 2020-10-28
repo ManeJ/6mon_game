@@ -37,7 +37,9 @@ class Touch extends HTMLElement {
     		me.audioEl.play();
 			me.audioEl.onended = function(){
 				me.stop();
-				resolve(me.shape);
+				setTimeout(function() {
+					resolve(me.shape);
+				}, 100);
 			}	
     	});
     }

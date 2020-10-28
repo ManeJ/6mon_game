@@ -1,22 +1,7 @@
-$(document).ready(function(){
 
-	function start(){
-	    $('#start').click(function () {
-	        var val = $('#pseudo').val();
-	        if (val != '') {
-	            $('#game-container').attr('style', 'visibility:visible');
-	            $('#game-img').attr('style', 'visibility:visible');
-	            $('.start-container, .bg-img').hide();    
-	        }else{
-	            $('#error').attr('style', 'visibility:visible');
-	        }
-	        console.log(val);
-	    });
-	}
+	
 
-	start();
-
-
+	window.customElements.define('div-list', ListeScore);
 	window.customElements.define('div-touch', Touch);
 	var main = document.getElementById('game-img');
 
@@ -57,8 +42,6 @@ $(document).ready(function(){
 		return note.play();
 	}
 
-
-
 	function playMelody(melody){
 		return new Promise(function(resolve, reject){
 			
@@ -69,7 +52,7 @@ $(document).ready(function(){
 				if (!note) {
 					return resolve('Melody ended');
 				}
-				return playNote(note).then(() => {
+				return playNote(note).then(function () {
 					i++;
 					return play(i);
 				});
@@ -79,5 +62,3 @@ $(document).ready(function(){
     	});
 		
 	}
-
-});
