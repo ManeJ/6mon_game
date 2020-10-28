@@ -20,6 +20,7 @@ form.addEventListener('submit', function (e) {
         $('#game-container').attr('style', 'visibility:visible');
         $('#game-img').attr('style', 'visibility:visible');
         $('.start-container, .bg-img').hide();
+        launchSequence();
 
     }else{
         $('#error').attr('style', 'visibility:visible');

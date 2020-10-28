@@ -39,7 +39,7 @@ class Touch extends HTMLElement {
 				me.stop();
 				setTimeout(function() {
 					resolve(me.shape);
-				}, 100);
+				}, 50);
 			}	
     	});
     }
