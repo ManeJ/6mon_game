@@ -1,7 +1,16 @@
+
+window.customElements.define('div-list', ListeScore);
 window.customElements.define('div-touch', Touch);
+<<<<<<< HEAD
 
 var main = document.getElementById('main');
 var touch;
+=======
+var main = document.getElementById('game-img');
+
+
+
+>>>>>>> 2ba62019a9da7471d97e5fc4193b10948e04cd20
 var square = new Touch('square','purple');
 var triangle = new Touch('triangle','green');
 var circle = new Touch('circle','orange');
@@ -12,6 +21,11 @@ main.appendChild(triangle);
 main.appendChild(circle);
 main.appendChild(cross);
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 2ba62019a9da7471d97e5fc4193b10948e04cd20
 square.addEventListener('touchClicked', function (ev) {
     console.log(ev.detail);
 });
@@ -30,9 +44,34 @@ cross.addEventListener('touchClicked', function (ev) {
 document.onclick = function(){
 	//touch.play().then(function(data){
 		//console.log('playdone');
-		playRandomSounds();
+		//playRandomSounds();
 	//});
+	playMelody(melodyComputer).then(function(d){
+		console.log(d);
+	});
 };
+
+
+
+
+function playNote(note) {
+
+}
+
+
+
+
+function playMelody(melody){
+	// je promets de joueur TOUTE LA MELODIE
+
+	
+		// JE choisi la PREMIERE
+		// JE JOUE LA PREMIERE
+		// QUAND LA PREMIERE EST FINI JE RELANCE LA FONCTION
+		// QUELLE FONCTION ?
+
+}
+
 
 function playRandomSounds() {
 	var random = Math.floor(Math.random()*4); //0,1,2,3
@@ -56,6 +95,7 @@ function playRandomSounds() {
 		playRandomSounds();
 	});
 }
+<<<<<<< HEAD
 
 $(document).ready(function(){
 
@@ -97,3 +137,5 @@ $(document).ready(function(){
             score += "";
     }
 });
+=======
+>>>>>>> 2ba62019a9da7471d97e5fc4193b10948e04cd20
