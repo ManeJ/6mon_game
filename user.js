@@ -6,16 +6,12 @@ class User {
         this.score = score;
     }
     get nameScore(){
-        return 'nom : ' + this.nameUser() + ';  score : '+ this.scoreUser()
+        return 'nom : ' + this.nameUser() + ';  score : '+ this.scoreUser();
     }
-
    nameUser() {
-        return this.name
+        return this.name;
     }
-
     scoreUser() {
-        return this.score
+        return this.score;
     }
-
-
 }
