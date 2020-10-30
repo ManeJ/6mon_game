@@ -1,7 +1,8 @@
 class Touch extends HTMLElement {
 	shape;
 	color;
-	
+	disableClick = true;
+
 	constructor (shape, color) {
 		super();
 		this.shape = shape;
@@ -13,19 +14,34 @@ class Touch extends HTMLElement {
 
 		this.audioEl = new Audio();
 		this.audioEl.src = this.sound;
-		this.audioEl.setAttribute('display', 'none');
+		this.audioEl.style.display = "none";
 		this.appendChild(this.audioEl);
 	}
 
 	initializeAttributes() {
         this.setAttribute("id", this.shape);
-		this.setAttribute("style", "background-color:" + this.color);
+		this.style.backgroundColor= this.color;
+		this.style.borderRadius = "50%";
+		this.style.cursor = "default";
     }
 
 	initListeners(){
 		let me = this;
-        this.onclick = function() {
-            me.play();
+		
+		this.onclick = function() {
+			if (me.disableClick === true ) {
+				return;
+			}
+            me.play().then(function() {
+            	 
+					var event = new CustomEvent('touchClicked', {
+						detail: me.shape
+					});
+					me.dispatchEvent(event);
+				
+            	
+	    	
+            });
         }
     }
 
@@ -35,19 +51,11 @@ class Touch extends HTMLElement {
 			me.style.opacity = 0.7;
     		me.audioEl.play();
 			me.audioEl.onended = function(){
-				me.stop();
-				resolve(me.shape);
+				me.style.opacity = 0;
+				setTimeout(function() {
+					resolve(me.shape);
+				}, 50);
 			}	
     	});
-    }
-
-    stop(){
-    	this.style.opacity = 0;
-    	var event = new CustomEvent('touchClicked', {
-				detail: {
-					id: this.shape
-				}
-			});
-    	this.dispatchEvent(event);
     }
 }
