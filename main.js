@@ -9,26 +9,26 @@ var circle = new Touch('circle','orange');
 var cross = new Touch('cross','blue');
 var tabTouch = [ square, triangle, circle, cross ];
 
-
-//var melodyComputer = [square, circle, circle, triangle, cross, cross, square];
-var melodyComputer = [square, circle];
+var melodyComputer = [];
 var userMelody = [];
+
+var userWin = 'false';
 
 for (var i = 0; i < tabTouch.length; i++) {
 	var key = tabTouch[i];
 	main.appendChild(key);
 	key.addEventListener('touchClicked', function (ev) {
 		userMelody.push(ev.detail);
-	    compareMelodies()
+	    compareMelodies();
 	});
 }
 
+
 function launchSequence() {
+	randomMelody()
 	setTimeout(function() {
 		playMelody(melodyComputer).then(function(d){
 			console.log(d);
-			// for 
-			//getPlayerClick(element);
 		});
 	}, 2000);
 	
@@ -61,7 +61,6 @@ function playMelody(melody){
 function compareMelodies(){
 	var userMelodySize = userMelody.length;
 	var melodyComputerSize = melodyComputer.length;
-	var userWin = 'false';
 	for (let i = 0; i < userMelody.length; i++){
 		var noteStrUser = userMelody[i];
 		var noteElOrdi = melodyComputer[i];		
@@ -77,9 +76,17 @@ function compareMelodies(){
 		}else {
 			userWin = 'false';
 			userMelody = [];
+			melodyComputer = [];
 			//alert("You failed !");
+			//launchSequence();
 			break;
 		}
 	}
 	return userWin;
 }
+
+function randomMelody() {
+	var randomNumber = Math.floor(Math.random() * 3);
+	melodyComputer.push(tabTouch[randomNumber]);
+}
+ 
