@@ -24,7 +24,7 @@ for (var i = 0; i < tabTouch.length; i++) {
 	});
 }
 
-function launchSequence() {
+function launchSequence(time) {
 	touchsDisabled(true);
 	setCursor("default");
 	randomMelody()
@@ -34,7 +34,7 @@ function launchSequence() {
 			touchsDisabled(false);
 			setCursor("pointer");
 		});
-	}, 500);
+	}, time);
 }
 
 function playNote(note) {
@@ -87,7 +87,7 @@ function compareMelodies(){
 				(i == melodyComputerSize - 1)){
 				userWin = 'true';
 				userMelody = [];
-				launchSequence();
+				launchSequence(500);
 			}
 		}else {
 			userWin = 'false';
@@ -113,7 +113,7 @@ function startGame() {
     $('#game-img').attr('style', 'visibility:visible');
     $('#start-container').hide();
     $('.modal-container, .bg-img').hide();
-    launchSequence();
+    launchSequence(1000);
 }
 
 function endGame() {
