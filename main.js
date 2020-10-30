@@ -56,8 +56,7 @@ function launchSequence() {
 		playMelody(melodyComputer).then(function(d){
 			console.log(d);
 		});
-	}, 2000);
-	
+	}, 2000);	
 }
 
 function playNote(note) {
@@ -115,4 +114,11 @@ function randomMelody() {
 	var randomNumber = Math.floor(Math.random() * 3);
 	melodyComputer.push(tabTouch[randomNumber]);
 }
- 
+
+function counter(){
+    var scoreHtml = 1;
+    setInterval(() => {
+        $("counter").html(scoreHtml++);
+    }, 1000);
+}
+counter();
