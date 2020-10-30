@@ -3,9 +3,9 @@ class ListeScore extends HTMLElement{
     constructor (item) {
         super();
 
-        this.item = item;
-        this.appendHtml();
-        this.increasing();
+        this.item = item
+        this.appendHtml()
+        this.increasing()
 
     }
     appendHtml (){
@@ -15,20 +15,21 @@ class ListeScore extends HTMLElement{
     }
     liMaker(){
 
-        let data = this.increasing();
+        let data = this.increasing()
         let me = this;
 
         data.forEach((i) => {
             const li = document.createElement('li');
-            let user = new User(i.name,i.score);
-            li.textContent = user.nameScore;
-            me.appendChild(li);
+            let user = new User(i.name,i.score)
+            li.textContent = user.nameScore
+                me.appendChild(li)
         })
 
     }
+
     increasing(){
-        var dataSort = this.item.sort((a, b) => (a.score < b.score) ? 1 : -1);
-        return dataSort;
+        var dataSort = this.item.sort((a, b) => (a.score < b.score) ? 1 : -1)
+        return dataSort
     }
 
 }

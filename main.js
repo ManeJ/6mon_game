@@ -6,16 +6,23 @@ function start(){
             //$('#game-img').attr('style', 'visibility:visible');
             $('.start-container, .bg-img').hide();
             var userName = document.getElementById('userName');
-            userName.appendChild()  
+            userName.appendChild();  
         }else{
             $('#error').attr('style', 'visibility:visible');
         }
         console.log(val);
     });
 }
-
-
 start();
+
+function endGame(){
+    $('#modal-btn').click(function () {
+        $('.modal-trial, .bg-img').attr('style', 'visibility:visible');
+        $('#modal-btn, .start-container').hide();
+        console.log('clicked');
+    });
+}
+endGame();
 
 window.customElements.define('div-list', ListeScore);
 window.customElements.define('div-touch', Touch);
@@ -50,15 +57,15 @@ cross.addEventListener('touchClicked', function (ev) {
 
 //playRandomSounds();
 
-document.onclick = function(){
-	//touch.play().then(function(data){
-		//console.log('playdone');
-		//playRandomSounds();
-	//});
-	playMelody(melodyComputer).then(function(d){
-		console.log(d);
-	});
-};
+// document.onclick = function(){
+// 	//touch.play().then(function(data){
+// 		//console.log('playdone');
+// 		//playRandomSounds();
+// 	//});
+// 	playMelody(melodyComputer).then(function(d){
+// 		console.log(d);
+// 	});
+// };
 
 
 
@@ -102,5 +109,8 @@ function playRandomSounds() {
 	touch.play().then(function(data){
 		console.log('playdone');
 		playRandomSounds();
-	});
+    });
+    
+
+    
 }
