@@ -12,7 +12,6 @@ var tabTouch = [ square, triangle, circle, cross ];
 var melodyComputer = [];
 var userMelody = [];
 
-var userWin = 'false';
 
 for (var i = 0; i < tabTouch.length; i++) {
 	var key = tabTouch[i];
@@ -61,6 +60,7 @@ function playMelody(melody){
 function compareMelodies(){
 	var userMelodySize = userMelody.length;
 	var melodyComputerSize = melodyComputer.length;
+var userWin = 'false';
 	for (let i = 0; i < userMelody.length; i++){
 		var noteStrUser = userMelody[i];
 		var noteElOrdi = melodyComputer[i];		
@@ -77,8 +77,7 @@ function compareMelodies(){
 			userWin = 'false';
 			userMelody = [];
 			melodyComputer = [];
-			//alert("You failed !");
-			//launchSequence();
+			endGame();
 			break;
 		}
 	}
@@ -89,4 +88,58 @@ function randomMelody() {
 	var randomNumber = Math.floor(Math.random() * 3);
 	melodyComputer.push(tabTouch[randomNumber]);
 }
+
+function startGame() {
+	$('#game-container').show();
+    $('#game-img').attr('style', 'visibility:visible');
+    $('#start-container').hide();
+    $('.modal-container, .bg-img').hide();
+    launchSequence();
+}
+
+function endGame() {
+	$('#game-container').hide();
+    $('#game-img').hide();
+    $('#start-container').hide();
+
+	var listScore = document.getElementById('list');
+	$('#end-container, .bg-img').show();
+
+	var divTabScore = document.getElementById('tabScore');
+	divTabScore.appendChild(listScore);
+	listScore.style.display = 'block';
+
+	/*var btnRetry = document.getElementById('retry');
+	btnRetry.onclick = function() {
+		startGame();
+    };*/
+}
  
+//storage
+const form = document.querySelector('form')
+const input = document.getElementById('pseudo')
+let userArray = localStorage.getItem('user')
+    ? JSON.parse(localStorage.getItem('user'))
+    : []
+localStorage.setItem('user', JSON.stringify(userArray))
+var data = JSON.parse(localStorage.getItem('user'))
+
+new ListeScore(data)
+
+form.addEventListener('submit', function (e) {
+    e.preventDefault()
+    if (input.value !== '') {
+    let NewUser = new User(input.value,10)
+    userArray.push(NewUser)
+    localStorage.setItem('user', JSON.stringify(userArray))
+
+    var dataVal = JSON.parse(localStorage.getItem('user'))
+
+        startGame();
+
+    }else{
+        $('#error').attr('style', 'visibility:visible');
+    }
+    $('#list').html("")
+    new ListeScore(dataVal)
+})

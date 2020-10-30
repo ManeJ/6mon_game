@@ -8,9 +8,8 @@
 		
 	</head>
 	<body>
-		<div id="list"></div>
         <div class="bg-img"></div>
-        <div class="start-container">
+        <div class="modal-container" id="start-container">
             <form>
                 <input type="text" id="pseudo" placeholder="Entrez votre pseudo">
                 <br>
@@ -21,10 +20,17 @@
         
         <div class="container" id="game-container">
             <div class="game-img" id="game-img"></div>
-            <div>Here is the score</div>
+            <!--<div>Here is the score</div>-->
         </div>
 
-        <div id="main"></div>
+        <div class="modal-container" id="end-container">
+            <div id="tabScore">
+                <div id="list"></div>
+            </div>
+            <form>
+                <input type="submit" id="retry" value="Retry">
+            </form>
+        </div>
 
 		<script src="Touch.js"></script>
 		<script src="listeScore.js"></script>

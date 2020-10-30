@@ -1,5 +1,9 @@
 #game-container{
-    visibility:hidden;
+    /*visibility:hidden;*/
+    display: none;
+}
+#end-container {
+    display: none;
 }
 #pseudo{
     margin-top: 15px;
@@ -11,7 +15,7 @@
     padding: 10px;
     border-radius: 8px;
 }
-.start-container{
+.modal-container{
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
     color: white;
@@ -90,4 +94,7 @@ div-touch#cross {
     position: absolute;
     top: 291px;
     left: 359px;
+}
+#list {
+    display: none;
 }

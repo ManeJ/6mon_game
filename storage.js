@@ -1,4 +1,4 @@
-const form = document.querySelector('form')
+/*const form = document.querySelector('form')
 const input = document.getElementById('pseudo')
 let userArray = localStorage.getItem('user')
     ? JSON.parse(localStorage.getItem('user'))
@@ -27,7 +27,7 @@ form.addEventListener('submit', function (e) {
     }
     $('#list').html("")
     new ListeScore(dataVal)
-})
+})*/
 
 
 
