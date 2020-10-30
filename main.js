@@ -7,28 +7,21 @@ var square = new Touch('square','purple');
 var triangle = new Touch('triangle','green');
 var circle = new Touch('circle','orange');
 var cross = new Touch('cross','blue');
-//var tabTouch = [ square ];
+var tabTouch = [ square, triangle, circle, cross ];
 
-main.appendChild(square);
-main.appendChild(triangle);
-main.appendChild(circle);
-main.appendChild(cross);
-
-square.addEventListener('touchClicked', function (ev) {
-    //console.log(ev.detail);
-});
-triangle.addEventListener('touchClicked', function (ev) {
-    //console.log(ev.detail);
-});
-circle.addEventListener('touchClicked', function (ev) {
-    //console.log(ev.detail);
-});
-cross.addEventListener('touchClicked', function (ev) {
-    //console.log(ev.detail);
-});
 
 //var melodyComputer = [square, circle, circle, triangle, cross, cross, square];
 var melodyComputer = [square, circle];
+var userMelody = [];
+
+for (var i = 0; i < tabTouch.length; i++) {
+	var key = tabTouch[i];
+	main.appendChild(key);
+	key.addEventListener('touchClicked', function (ev) {
+		userMelody.push(ev.detail);
+	    compareMelodies()
+	});
+}
 
 function launchSequence() {
 	setTimeout(function() {
@@ -65,11 +58,28 @@ function playMelody(melody){
 	});
 }
 
-/* test vérification
-function getPlayerClick(element) {
-	var melodyPlayer = [];
-	element.addEventListener('touchClicked', function (ev) {
-	    console.log(ev.detail.id);
-	});
-	return melodyPlayer;
-}*/
+function compareMelodies(){
+	var userMelodySize = userMelody.length;
+	var melodyComputerSize = melodyComputer.length;
+	var userWin = 'false';
+	for (let i = 0; i < userMelody.length; i++){
+		var noteStrUser = userMelody[i];
+		var noteElOrdi = melodyComputer[i];		
+		if (noteStrUser === noteElOrdi.shape){
+			userWin = 'en attente'
+			if (
+				(userMelodySize == melodyComputerSize) && 
+				(i == melodyComputerSize - 1)){
+				userWin = 'true';
+				userMelody = [];
+				launchSequence();
+			}
+		}else {
+			userWin = 'false';
+			userMelody = [];
+			//alert("You failed !");
+			break;
+		}
+	}
+	return userWin;
+}
