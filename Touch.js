@@ -38,9 +38,6 @@ class Touch extends HTMLElement {
 						detail: me.shape
 					});
 					me.dispatchEvent(event);
-				
-            	
-	    	
             });
         }
     }

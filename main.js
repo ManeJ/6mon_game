@@ -5,10 +5,10 @@ var main = document.getElementById('game-img');
 var score = 0;
 var name;
 
-var square = new Touch('square','purple');
-var triangle = new Touch('triangle','green');
-var circle = new Touch('circle','orange');
-var cross = new Touch('cross','blue');
+var square = new Touch('square','#D095D0');
+var triangle = new Touch('triangle','#99D899');
+var circle = new Touch('circle','#CE9392');
+var cross = new Touch('cross','#8DC5C6');
 var tabTouch = [ square, triangle, circle, cross ];
 
 var melodyComputer = [];
