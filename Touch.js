@@ -33,7 +33,7 @@ class Touch extends HTMLElement {
     play() {
     	let me = this;
     	return new Promise(function(resolve, reject){
-			me.style.opacity = 0.7;
+			me.style.opacity = 0.5;
     		me.audioEl.play();
 			me.audioEl.onended = function(){
 				me.stop();
@@ -50,5 +50,27 @@ class Touch extends HTMLElement {
 				}
 			});
     	this.dispatchEvent(event);
-    }
+	}
+	
+	function compareMelodies(){
+		var userMelodieSize = userMelodie.length;
+		var ordiMelodieSize = ordiMelodie.length;
+		var userWin = 'false';
+		for (let i = 0; i < userMelodie.length; i++){
+			var noteStrUser = userMelodie[i];
+			var noteElOrdi = ordiMelodie[i];
+			if (noteStrUser === noteElOrdi.color){
+				userWin = 'en attente'
+				if (
+					(userMelodieSize == ordiMelodieSize) && 
+					(i == ordiMelodieSize - 1)){
+					userWin = 'true';
+				}
+			}else {
+				userWin = 'false';
+				break;
+			}
+		}
+		return userWin;
+	}
 }
