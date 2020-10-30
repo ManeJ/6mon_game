@@ -109,10 +109,6 @@ function endGame() {
 	divTabScore.appendChild(listScore);
 	listScore.style.display = 'block';
 
-	/*var btnRetry = document.getElementById('retry');
-	btnRetry.onclick = function() {
-		startGame();
-    };*/
 }
  
 //storage

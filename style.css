@@ -11,7 +11,8 @@
     margin-bottom: 15px;
     border-radius: 8px;
 }
-#start{
+#start,
+#retry {
     padding: 10px;
     border-radius: 8px;
 }
@@ -97,4 +98,10 @@ div-touch#cross {
 }
 #list {
     display: none;
+}
+table {
+    margin: auto;
+}
+#retryForm {
+    padding-top: 20px;
 }
