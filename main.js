@@ -2,6 +2,8 @@ window.customElements.define('div-list', ListeScore);
 window.customElements.define('div-touch', Touch);
 var main = document.getElementById('game-img');
 
+var score = 0;
+var name;
 
 var square = new Touch('square','purple');
 var triangle = new Touch('triangle','green');
@@ -22,14 +24,17 @@ for (var i = 0; i < tabTouch.length; i++) {
 	});
 }
 
-
 function launchSequence() {
+	touchsDisabled(true);
+	setCursor("default");
 	randomMelody()
 	setTimeout(function() {
 		playMelody(melodyComputer).then(function(d){
 			console.log(d);
+			touchsDisabled(false);
+			setCursor("pointer");
 		});
-	}, 2000);
+	}, 1000);
 	
 }
 
@@ -41,6 +46,7 @@ function playMelody(melody){
 	return new Promise(function(resolve, reject){
 		
 		var i = 0;
+		
 		
 		function play(i) {
 			var note = melody[i];
@@ -57,19 +63,35 @@ function playMelody(melody){
 	});
 }
 
+function touchsDisabled(bool){
+	tabTouch.map(function(touch){
+		touch.disableClick = bool;
+		console.log("fonction : " + touch.disableClick);
+	});
+}
+
+function setCursor(x) {
+	for (var i = 0; i < tabTouch.length; i++) {
+		var key = tabTouch[i];
+		key.style.cursor = x;
+	}
+}
+
 function compareMelodies(){
 	var userMelodySize = userMelody.length;
 	var melodyComputerSize = melodyComputer.length;
-var userWin = 'false';
+	var userWin = 'false';
 	for (let i = 0; i < userMelody.length; i++){
 		var noteStrUser = userMelody[i];
 		var noteElOrdi = melodyComputer[i];		
 		if (noteStrUser === noteElOrdi.shape){
-			userWin = 'en attente'
+			userWin = 'en attente';
+			
 			if (
 				(userMelodySize == melodyComputerSize) && 
 				(i == melodyComputerSize - 1)){
 				userWin = 'true';
+				score += 1;
 				userMelody = [];
 				launchSequence();
 			}
@@ -77,6 +99,9 @@ var userWin = 'false';
 			userWin = 'false';
 			userMelody = [];
 			melodyComputer = [];
+			storage();
+			score = 0;
+			touchsDisabled(true);
 			endGame();
 			break;
 		}
@@ -125,11 +150,8 @@ new ListeScore(data)
 form.addEventListener('submit', function (e) {
     e.preventDefault()
     if (input.value !== '') {
-    let NewUser = new User(input.value,10)
-    userArray.push(NewUser)
-    localStorage.setItem('user', JSON.stringify(userArray))
 
-    var dataVal = JSON.parse(localStorage.getItem('user'))
+        name = input.value
 
         startGame();
 
@@ -137,5 +159,19 @@ form.addEventListener('submit', function (e) {
         $('#error').attr('style', 'visibility:visible');
     }
     $('#list').html("")
-    new ListeScore(dataVal)
+
 })
+
+function increasing(usersTop){
+    userArray.push(usersTop)
+    var dataSort = userArray.sort((a, b) => (a.score < b.score) ? 1 : -1);
+    var tab = dataSort.slice(0, 10)
+    return tab;
+}
+
+function storage(){
+    let NewUser = new User(name,score)
+    localStorage.setItem('user', JSON.stringify(increasing(NewUser)))
+    var dataVal = JSON.parse(localStorage.getItem('user'))
+    new ListeScore(dataVal)
+}

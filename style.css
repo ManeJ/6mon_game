@@ -1,5 +1,4 @@
 #game-container{
-    /*visibility:hidden;*/
     display: none;
 }
 #end-container {
@@ -34,6 +33,7 @@
 }
 body, html {
     height: 100%;
+    overflow: hidden;
 }
 * {
     box-sizing: border-box;
@@ -55,10 +55,6 @@ body, html {
     margin-left: 80px;
     position: relative;
 }
-/* .container{
-    height: 100%;
-    width: 100%;
-} */
 #error{
     color: red;
     visibility:hidden;
@@ -70,7 +66,6 @@ div-touch {
 	display: block;
 	z-index:10;
 	opacity:0;
-	/* position: relative; */
 }
 
 div-touch#square {
