@@ -11,19 +11,41 @@ class ListeScore extends HTMLElement{
     appendHtml (){
         let listScore = document.getElementById('list');
         listScore.appendChild(this)
-        this.liMaker()
+        this.tabMaker()
     }
-    liMaker(){
+    createEl(el){
+        var tab = document.createElement(el);
+        return tab;
+    }
+    tabMaker(){
 
-        let data = this.increasing()
+        let data = this.increasing();
         let me = this;
 
-        data.forEach((i) => {
-            const li = document.createElement('li');
-            let user = new User(i.name,i.score)
-            li.textContent = user.nameScore
-                me.appendChild(li)
+        var scoreHtml  = "<table>";
+		scoreHtml += "<thead>";
+		scoreHtml += "<tr><th>Position</th><th>Name</th><th>Score</th></tr>";
+		scoreHtml += "</thead>";
+        scoreHtml += "<tbody>";
+        
+        $("div-list").html(scoreHtml);
+
+        data.forEach(function(el, i) {
+            let user = new User(el.name,el.score)
+
+            scoreHtml += "<tr>";
+			scoreHtml += "<td>"+ i +"</td>";
+			scoreHtml += "<td>"+ user.name +"</td>";
+			scoreHtml += "<td>"+ user.score +"</td>";
+			scoreHtml += "</tr>";
+            
+            $("div-list").html(scoreHtml);
         })
+
+        scoreHtml += "</tbody>";
+        scoreHtml += "</table>";
+        
+        $("div-list").html(scoreHtml);
 
     }
 

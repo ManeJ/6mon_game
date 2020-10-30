@@ -1,6 +1,9 @@
 #game-container{
     visibility:hidden;
 }
+table{
+    margin: 0 auto;
+}
 #pseudo{
     margin-top: 15px;
     padding: 12px;

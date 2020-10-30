@@ -29,88 +29,90 @@ window.customElements.define('div-touch', Touch);
 var main = document.getElementById('game-img');
 
 
-
 var square = new Touch('square','purple');
 var triangle = new Touch('triangle','green');
 var circle = new Touch('circle','orange');
 var cross = new Touch('cross','blue');
+var tabTouch = [ square, triangle, circle, cross ];
 
-main.appendChild(square);
-main.appendChild(triangle);
-main.appendChild(circle);
-main.appendChild(cross);
+var melodyComputer = [];
+var userMelody = [];
 
+var userWin = 'false';
 
-
-square.addEventListener('touchClicked', function (ev) {
-    console.log(ev.detail);
-});
-triangle.addEventListener('touchClicked', function (ev) {
-    console.log(ev.detail);
-});
-circle.addEventListener('touchClicked', function (ev) {
-    console.log(ev.detail);
-});
-cross.addEventListener('touchClicked', function (ev) {
-    console.log(ev.detail);
-});
-
-//playRandomSounds();
-
-// document.onclick = function(){
-// 	//touch.play().then(function(data){
-// 		//console.log('playdone');
-// 		//playRandomSounds();
-// 	//});
-// 	playMelody(melodyComputer).then(function(d){
-// 		console.log(d);
-// 	});
-// };
+for (var i = 0; i < tabTouch.length; i++) {
+	var key = tabTouch[i];
+	main.appendChild(key);
+	key.addEventListener('touchClicked', function (ev) {
+		userMelody.push(ev.detail);
+	    compareMelodies();
+	});
+}
 
 
-
+function launchSequence() {
+	randomMelody()
+	setTimeout(function() {
+		playMelody(melodyComputer).then(function(d){
+			console.log(d);
+		});
+	}, 2000);
+	
+}
 
 function playNote(note) {
-
+	return note.play();
 }
-
-
-
 
 function playMelody(melody){
-	// je promets de joueur TOUTE LA MELODIE
-
-	
-		// JE choisi la PREMIERE
-		// JE JOUE LA PREMIERE
-		// QUAND LA PREMIERE EST FINI JE RELANCE LA FONCTION
-		// QUELLE FONCTION ?
-
+	return new Promise(function(resolve, reject){
+		
+		var i = 0;
+		
+		function play(i) {
+			var note = melody[i];
+			if (!note) {
+				return resolve('Melody ended');
+			}
+			return playNote(note).then(function () {
+				i++;
+				return play(i);
+			});
+		}
+		
+		play(i);
+	});
 }
 
-
-function playRandomSounds() {
-	var random = Math.floor(Math.random()*4); //0,1,2,3
-
-	switch (random) {
-		case 0:
-			touch = square;
+function compareMelodies(){
+	var userMelodySize = userMelody.length;
+	var melodyComputerSize = melodyComputer.length;
+	for (let i = 0; i < userMelody.length; i++){
+		var noteStrUser = userMelody[i];
+		var noteElOrdi = melodyComputer[i];		
+		if (noteStrUser === noteElOrdi.shape){
+			userWin = 'en attente'
+			if (
+				(userMelodySize == melodyComputerSize) && 
+				(i == melodyComputerSize - 1)){
+				userWin = 'true';
+				userMelody = [];
+				launchSequence();
+			}
+		}else {
+			userWin = 'false';
+			userMelody = [];
+			melodyComputer = [];
+			//alert("You failed !");
+			//launchSequence();
 			break;
-		case 1:
-			touch = triangle;
-			break;
-		case 2:
-			touch = circle;
-			break;
-		case 3:
-			touch = cross;
-			break;
+		}
 	}
-	touch.play().then(function(data){
-		console.log('playdone');
-		playRandomSounds();
-    });
-    
-
-    
+	return userWin;
 }
+
+function randomMelody() {
+	var randomNumber = Math.floor(Math.random() * 3);
+	melodyComputer.push(tabTouch[randomNumber]);
+}
+ 
