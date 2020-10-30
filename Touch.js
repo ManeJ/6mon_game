@@ -1,6 +1,7 @@
 class Touch extends HTMLElement {
 	shape;
 	color;
+	disableClick = true;
 
 	constructor (shape, color) {
 		super();
@@ -21,16 +22,25 @@ class Touch extends HTMLElement {
         this.setAttribute("id", this.shape);
 		this.style.backgroundColor= this.color;
 		this.style.borderRadius = "50%";
+		this.style.cursor = "default";
     }
 
 	initListeners(){
 		let me = this;
-        this.onclick = function() {
+		
+		this.onclick = function() {
+			if (me.disableClick === true ) {
+				return;
+			}
             me.play().then(function() {
-            	var event = new CustomEvent('touchClicked', {
-					detail: me.shape
-				});
-	    	me.dispatchEvent(event);
+            	 
+					var event = new CustomEvent('touchClicked', {
+						detail: me.shape
+					});
+					me.dispatchEvent(event);
+				
+            	
+	    	
             });
         }
     }

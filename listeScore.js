@@ -34,7 +34,7 @@ class ListeScore extends HTMLElement{
             let user = new User(el.name,el.score)
 
             scoreHtml += "<tr>";
-			scoreHtml += "<td>"+ i +"</td>";
+			scoreHtml += "<td>"+ (i+1) +"</td>";
 			scoreHtml += "<td>"+ user.name +"</td>";
 			scoreHtml += "<td>"+ user.score +"</td>";
 			scoreHtml += "</tr>";
