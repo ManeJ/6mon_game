@@ -34,8 +34,7 @@ function launchSequence() {
 			touchsDisabled(false);
 			setCursor("pointer");
 		});
-	}, 1000);
-	
+	}, 500);
 }
 
 function playNote(note) {
@@ -44,10 +43,7 @@ function playNote(note) {
 
 function playMelody(melody){
 	return new Promise(function(resolve, reject){
-		
 		var i = 0;
-		
-		
 		function play(i) {
 			var note = melody[i];
 			if (!note) {
@@ -58,7 +54,6 @@ function playMelody(melody){
 				return play(i);
 			});
 		}
-		
 		play(i);
 	});
 }
@@ -86,12 +81,11 @@ function compareMelodies(){
 		var noteElOrdi = melodyComputer[i];		
 		if (noteStrUser === noteElOrdi.shape){
 			userWin = 'en attente';
-			
+			score += 1;
 			if (
 				(userMelodySize == melodyComputerSize) && 
 				(i == melodyComputerSize - 1)){
 				userWin = 'true';
-				score += 1;
 				userMelody = [];
 				launchSequence();
 			}
